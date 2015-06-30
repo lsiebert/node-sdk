@@ -1,22 +1,41 @@
 {
-  "name": "appsaholic",
-  "version": "0.0.0",
+  "name": "appsaholic-sdk",
+  "version": "0.1.0",
   "description": "Appsaholic SDK for Node",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/mocha/bin/mocha test/ --recursive",
+    "lint": "node node_modules/eslint/bin/eslint.js lib",
+    "cover": "node node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- test --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Appsaholic/node-sdk"
   },
   "keywords": [
-    "appsaholic"
+    "appsaholic",
+    "client",
+    "sdk"
   ],
-  "author": "Appsaholic.com",
+  "author": "Appsaholic.com <help@appsaholic.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Appsaholic/node-sdk/issues"
+  },
+  "homepage": "https://github.com/Appsaholic/node-sdk",
   "dependencies": {
+    "lodash": "^3.10.0",
     "request-promise": "^0.4.2"
   },
   "devDependencies": {
+    "bluebird": "^2.9.30",
     "chai": "^3.0.0",
+    "eslint": "^0.24.0",
     "gulp": "^3.9.0",
-    "mocha": "^2.2.5"
+    "gulp-eslint": "^0.15.0",
+    "gulp-mocha": "^2.1.2",
+    "istanbul": "^0.3.17",
+    "mocha": "^2.2.5",
+    "sinon": "^1.15.4"
   }
 }
