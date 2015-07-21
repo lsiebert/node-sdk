@@ -2,7 +2,7 @@ var Appsaholic = require('../');
 var Session = Appsaholic.Session;
 var User = Appsaholic.User;
 
-var session = new new Session('API_KEY', 'API_SECRET', 'e62ed26b-3a1d-4325-a2d1-9df5efc6f20a');
+var session = new Session('API_KEY', 'API_SECRET', 'e62ed26b-3a1d-4325-a2d1-9df5efc6f20a');
 var user = new User(session);
 user.getInformation().then(function(user) {
     console.log("ID: %s", user.id);
