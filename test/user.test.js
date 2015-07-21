@@ -2,6 +2,9 @@
 var Bluebird = require('bluebird');
 var expect = require('chai').expect;
 var sinon = require('sinon');
+var requestErrors = require('request-promise/errors');
+var _ = require('lodash');
+var errors = require('../lib/errors');
 
 describe('Appsaholic User', function() {
     var Session = require('../').Session;
@@ -47,5 +50,36 @@ describe('Appsaholic User', function() {
 
             done();
         });
+    });
+
+    it('gets error with an invalid ID', function(done) {
+        session.request.onCall(0).returns(Bluebird.reject(_.assign(new requestErrors.StatusCodeError(404, {}), {
+            error: {
+                status: 'fail',
+                message: null,
+                data: {
+                    error: {
+                        code: 'AHOLIC-1404',
+                        message: 'The specified user does not exist'
+                    }
+                }
+            }
+        })));
+
+        var user = new User(session);
+        user.getInformation().then(function() {
+            done(new Error('Should have errored out!'));
+        }).catch(function(reason) {
+            sinon.assert.calledWith(session.request, 'get', '/v1/users/' + session.userId + '.json');
+
+            expect(reason).to.be.an('object');
+            expect(reason instanceof errors.UserNotFoundError).to.eql(true);
+            expect(reason.name).to.eql('UserNotFoundError');
+            expect(reason.code).to.eql('AHOLIC-1404');
+
+            throw reason;
+        }).catch(errors.UserNotFoundError, function (reason) {
+            done();
+        }).catch(done);
     });
 });
