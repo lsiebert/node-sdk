@@ -1,5 +1,6 @@
 Appsaholic SDK for NodeJS
 ======================
+[![npm package](https://nodei.co/npm/appsaholic-sdk.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/appsaholic-sdk/)
 
 [![Build Status](https://travis-ci.org/Appsaholic/node-sdk.svg?branch=master)](https://travis-ci.org/Appsaholic/node-sdk)
 
